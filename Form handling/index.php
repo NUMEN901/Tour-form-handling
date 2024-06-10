@@ -1,12 +1,14 @@
 <?php
 session_start();
+$token = md5(uniqid(microtime(), true));
+$_SESSION['token'] = $token;
 include('function.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <style>
@@ -41,7 +43,8 @@ include('function.php');
                 <p>Message sent successfully!</p>
                 <p>Here are the details you entered!</p>
                 <ul>
-                    <li>Name: <?php echo esc_str( $data['name']); ?></li>
+                    <li>Fname: <?php echo esc_str( $data['fname']); ?></li>
+                    <li>Lname: <?php echo esc_str($data['lname']); ?></li>
                     <li>Email: <?php echo esc_str($data['email']); ?></li>
                     <li>Region: <?php echo esc_str( $data['region']); ?></li>
                     <li>Season: <?php echo esc_str($data['season']); ?></li>
@@ -114,7 +117,7 @@ include('function.php');
         <div class="field-group">
             Tell us more about your interest in this tour : <textarea name="message" id="message" cols="30" rows="10"></textarea>
         </div>
-        <input type="hidden" name="token" value="">
+        <input type="hidden" name="token" value="<?= $token ?>">
         <input type="submit"><br>
     </form>
     </div>
